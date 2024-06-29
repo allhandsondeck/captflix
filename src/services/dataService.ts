@@ -25,6 +25,6 @@ export async function searchMovies(query: string): Promise<Show[]> {
 }
 
 function handleError(): void {
-  // Potential logging to a centralised logging service
   throw new Error('Network response was not ok');
+  // Potential logging to a centralised logging service
 }
