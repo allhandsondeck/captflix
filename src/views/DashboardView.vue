@@ -5,7 +5,7 @@ import { fetchMovies, searchMovies } from '../services/dataService';
 import type { Movie } from '@/types/movie';
 import type { Show } from '@/types/movieAsSearchResult';
 
-const groupedMovies = ref<Record<string, (Movie | Show)[]>>({});
+const groupedMovies = ref<(Movie | Show)[] | null>(null);
 const searchTerm = ref('');
 
 // Ensure debounce function is correctly implemented
@@ -60,7 +60,7 @@ function groupAndSortMovies(movies: Movie[] | Show[]) {
         if (!acc[genre]) {
           acc[genre] = [];
         }
-        if (acc[genre].length < 6) {
+        if (acc[genre].length < 5) {
           acc[genre].push(movie);
         }
       });

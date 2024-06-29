@@ -17,7 +17,7 @@ onMounted(async () => {
   }
 });
 
-const goToDashboard = () => {
+const goToDashboard = (): void => {
   router.push('/');
 };
 </script>
@@ -40,7 +40,7 @@ const goToDashboard = () => {
 <style>
 .back-button {
   padding: 10px 20px;
-  background-color: #007bff; /* Bootstrap primary color for example */
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 5px;
@@ -52,7 +52,7 @@ const goToDashboard = () => {
 }
 
 .back-button:hover {
-  background-color: #0056b3; /* A darker shade for hover effect */
+  background-color: #0056b3;
 }
 
 .details {

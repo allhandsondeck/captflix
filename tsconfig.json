@@ -1,4 +1,9 @@
 {
+  "compilerOptions": {
+    "types": ["vitest/globals"],
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
+  },
   "files": [],
   "references": [
     {
