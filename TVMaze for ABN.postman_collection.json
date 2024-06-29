@@ -1,0 +1,84 @@
+{
+	"info": {
+		"_postman_id": "bf15be18-5135-471e-8682-6675207e5ca9",
+		"name": "TVMaze for ABN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25532326"
+	},
+	"item": [
+		{
+			"name": "Search show",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.tvmaze.com/search/shows?q=hey",
+					"protocol": "http",
+					"host": [
+						"api",
+						"tvmaze",
+						"com"
+					],
+					"path": [
+						"search",
+						"shows"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "hey"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dashboard - Show index",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://api.tvmaze.com/shows?page=1",
+					"protocol": "http",
+					"host": [
+						"api",
+						"tvmaze",
+						"com"
+					],
+					"path": [
+						"shows"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Details Screen - TV show by show id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.tvmaze.com/shows/1",
+					"protocol": "https",
+					"host": [
+						"api",
+						"tvmaze",
+						"com"
+					],
+					"path": [
+						"shows",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
