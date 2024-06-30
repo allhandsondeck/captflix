@@ -2,7 +2,7 @@
 import type { MovieDetails } from '@/types/movieDetails';
 import { onMounted, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import { fetchMovieDetails } from '../services/dataService';
+import { fetchMovieDetails } from '@/services/dataService';
 
 const route = useRoute();
 const router = useRouter();
