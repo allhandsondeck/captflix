@@ -4,7 +4,6 @@ import DashboardView from '@/views/DashboardView.vue';
 import { fetchMovies, searchMovies } from '@/services/dataService';
 import { debounce } from '@/utils/helpers';
 
-// Mock the external modules
 vi.mock('@/services/dataService', () => ({
   fetchMovies: vi.fn(),
   searchMovies: vi.fn()
@@ -17,7 +16,7 @@ vi.mock('@/utils/helpers', () => ({
 
 describe('DashboardView', () => {
   beforeEach(() => {
-    // Arrange: Reset mocks before each test
+    // Arrange
     fetchMovies.mockClear();
     searchMovies.mockClear();
     debounce.mockClear();
@@ -28,7 +27,13 @@ describe('DashboardView', () => {
     fetchMovies.mockResolvedValueOnce([]);
 
     // Act
-    const wrapper = mount(DashboardView);
+    const wrapper = mount(DashboardView, {
+      global: {
+        stubs: {
+          'router-link': true
+        }
+      }
+    });
     await wrapper.vm.$nextTick();
 
     // Assert
@@ -40,7 +45,13 @@ describe('DashboardView', () => {
     fetchMovies.mockResolvedValueOnce([]);
 
     // Act
-    mount(DashboardView);
+    mount(DashboardView, {
+      global: {
+        stubs: {
+          'router-link': true
+        }
+      }
+    });
 
     // Assert
     expect(fetchMovies).toHaveBeenCalled();
@@ -52,7 +63,13 @@ describe('DashboardView', () => {
     searchMovies.mockResolvedValueOnce([]);
 
     // Act
-    const wrapper = mount(DashboardView);
+    const wrapper = mount(DashboardView, {
+      global: {
+        stubs: {
+          'router-link': true
+        }
+      }
+    });
     await wrapper.find('input').setValue(searchTerm);
     await wrapper.vm.$nextTick();
 

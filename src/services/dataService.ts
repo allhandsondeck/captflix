@@ -20,7 +20,7 @@ export async function searchMovies(query: string): Promise<Show[]> {
   const response = await fetch(`${TVMAZE_API_URL}/search/shows?q=${encodeURIComponent(query)}`);
   if (!response.ok) handleError();
   const searchResults = await response.json();
-  // The search endpoint returns an array of objects with a 'show' property containing the movie details
+
   return searchResults.map((result: { show: Movie }) => result.show);
 }
 

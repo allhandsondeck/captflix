@@ -46,7 +46,7 @@ export function getGroupedAndSortedMovies(
  * @param movies - An array of movies or shows.
  * @returns An object with genres as keys and arrays of movies or shows as values.
  */
-function groupMoviesByGenre(movies: (Movie | Show)[]): Record<string, (Movie | Show)[]> {
+export function groupMoviesByGenre(movies: (Movie | Show)[]): Record<string, (Movie | Show)[]> {
   return movies.reduce<Record<string, (Movie | Show)[]>>((acc, movie) => {
     movie.genres.forEach((genre) => {
       if (!acc[genre]) acc[genre] = [];
@@ -62,7 +62,7 @@ function groupMoviesByGenre(movies: (Movie | Show)[]): Record<string, (Movie | S
  * @param groupedMovies - An object with genres as keys and arrays of movies or shows as values.
  * @returns The same object with each genre's array sorted by rating in descending order.
  */
-function sortMoviesByRating(
+export function sortMoviesByRating(
   groupedMovies: Record<string, (Movie | Show)[]>
 ): Record<string, (Movie | Show)[]> {
   Object.keys(groupedMovies).forEach((genre) => {

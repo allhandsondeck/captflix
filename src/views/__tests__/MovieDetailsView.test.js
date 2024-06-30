@@ -1,6 +1,6 @@
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { createRouter, createMemoryHistory } from 'vue-router';
 import { mount, flushPromises } from '@vue/test-utils';
-import { createRouterMock, injectRouterMock } from 'vue-router-mock';
 import MovieDetailsView from '@/views/MovieDetailsView.vue';
 import { fetchMovieDetails } from '@/services/dataService';
 
@@ -9,16 +9,19 @@ vi.mock('@/services/dataService', () => ({
 }));
 
 describe('MovieDetailsView.vue', () => {
-  let routerMock;
+  let router;
 
   beforeEach(() => {
-    // Arrange
-    routerMock = createRouterMock();
-    injectRouterMock(routerMock);
-  });
+    router = createRouter({
+      history: createMemoryHistory(),
+      routes: [
+        {
+          component: { template: '' }
+        }
+      ]
+    });
 
-  afterEach(() => {
-    vi.clearAllMocks();
+    router.push = vi.fn();
   });
 
   it('fetches movie details and displays them', async () => {
@@ -32,9 +35,14 @@ describe('MovieDetailsView.vue', () => {
         '<p>A thief who steals corporate secrets through the use of dream-sharing technology.</p>'
     };
     fetchMovieDetails.mockResolvedValue(movieDetailsMock);
-    const wrapper = mount(MovieDetailsView, { global: { plugins: [routerMock] } });
 
     // Act
+    const wrapper = mount(MovieDetailsView, {
+      global: {
+        plugins: [router],
+        mocks: {}
+      }
+    });
     await flushPromises();
 
     // Assert
@@ -53,9 +61,14 @@ describe('MovieDetailsView.vue', () => {
   it('displays an error message if fetching movie details fails', async () => {
     // Arrange
     fetchMovieDetails.mockRejectedValue();
-    const wrapper = mount(MovieDetailsView, { global: { plugins: [routerMock] } });
 
     // Act
+    const wrapper = mount(MovieDetailsView, {
+      global: {
+        plugins: [router],
+        mocks: {}
+      }
+    });
     await flushPromises();
 
     // Assert
@@ -64,12 +77,17 @@ describe('MovieDetailsView.vue', () => {
 
   it('navigates back to the dashboard when the back button is clicked', async () => {
     // Arrange
-    const wrapper = mount(MovieDetailsView, { global: { plugins: [routerMock] } });
+    const wrapper = mount(MovieDetailsView, {
+      global: {
+        plugins: [router],
+        mocks: {}
+      }
+    });
 
     // Act
     await wrapper.find('.back-button').trigger('click');
 
     // Assert
-    expect(routerMock.push).toHaveBeenCalledWith('/');
+    expect(router.push).toHaveBeenCalledWith('/');
   });
 });
