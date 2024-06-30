@@ -10,15 +10,17 @@ import type { Ref } from 'vue';
  * @param searchTerm - A Vue ref object containing the current search term.
  * @returns The debounced function.
  */
-export function debounce(
-  func: (...args: any[]) => void,
+export function debounce<T extends (...args: any[]) => void>(
+  func: T,
   delay: number,
   searchTerm: Ref<string>
-): (...args: any[]) => void {
+): (...args: Parameters<T>) => void {
   let debounceTimer: ReturnType<typeof setTimeout>;
-  return function (this: any, ...args: any[]): void {
-    const context = this;
+
+  return function (this: ThisParameterType<T>, ...args: Parameters<T>): void {
+    const context = this as ThisParameterType<T>;
     const currentSearchTerm = args[0];
+
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
       if (searchTerm.value === currentSearchTerm) {
